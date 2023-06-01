@@ -5,7 +5,6 @@ import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import { FiGrid, FiList, FiPlus, FiSearch } from "react-icons/fi"
-import DashboardHeader from "../components/DashboardHeader"
 import { useEffect, useState } from "react"
 import { uid } from "uid"
 
@@ -13,7 +12,7 @@ const Dashboard = () => {
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
-        redirect('/signin?callbackUrl=/dashboard')
+        redirect('/signin?callbackUrl=/user/dashboard')
     },
   })
 
@@ -28,9 +27,8 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <main>
-      <DashboardHeader/>
-      <section className="py-10 px-5 md:p-20 w-full flex flex-col items-center">
+    <section>
+      <div className="py-10 px-5 md:p-20 w-full flex flex-col items-center">
         <div className="flex items-center space-x-3 md:space-x-5 w-full justify-center">
           <div className="flex items-center w-3/4 bg-black border border-neutral-500 focus-within:border-white duration-300 rounded-md">
             <div className="pl-3.5">
@@ -58,7 +56,7 @@ const Dashboard = () => {
               <FiList className="text-xl"/>
             </button>
           </div>
-          <Link href="/new-speech" className="flex items-center xl:space-x-2 bg-white text-black p-2.5 font-medium rounded-md hover:bg-opacity-80 duration-300">
+          <Link href="/user/new" className="flex items-center xl:space-x-2 bg-white text-black p-2.5 font-medium rounded-md hover:bg-opacity-80 duration-300">
             <p className="hidden xl:block">Add New</p>
             <FiPlus className="text-xl"/>
           </Link>
@@ -74,8 +72,8 @@ const Dashboard = () => {
             }
           </div>
       </div>
-      </section>
-    </main>
+      </div>
+    </section>
   )
 }
 

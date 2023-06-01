@@ -42,11 +42,11 @@ const Navbar = () => {
                 >
                     <p>Sign Out</p>
                 </button>
-                <Link href="/dashboard" className="border hover:opacity-80 border-neutral-500 text-neutral-500 px-4 py-2 font-medium rounded-md hover:bg-opacity-80 duration-300">
+                <Link href="/user/dashboard" className="border hover:opacity-80 border-neutral-500 text-neutral-500 px-4 py-2 font-medium rounded-md hover:bg-opacity-80 duration-300">
                   <p>Dashboard</p>
                 </Link>
               </> :
-              <Link href="/signin?callback=/dashboard" className="bg-white text-black px-4 py-2 font-medium rounded-md hover:bg-opacity-80 duration-300">Sign In</Link>
+              <Link href="/signin?callback=/user/dashboard" className="bg-white text-black px-4 py-2 font-medium rounded-md hover:bg-opacity-80 duration-300">Sign In</Link>
             }
           </div>
           <button

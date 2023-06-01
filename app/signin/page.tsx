@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc"
 
 const signin = () => {
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
+  const callbackUrl = searchParams.get('callbackUrl') || '/user/dashboard'
 
   return (
     <main className="w-screen h-screen flex justify-center items-center">
