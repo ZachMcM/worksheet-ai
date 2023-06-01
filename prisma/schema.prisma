@@ -43,6 +43,9 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  mcTests McTest[]
+  writtenTests WrittenTest[]
+  flashcardSets FlashCardSet[]
 }
 
 model VerificationToken {
@@ -52,3 +55,60 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model McTest {
+  id String @id @default(cuid())
+  name String
+  prompt String
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  questions Question[]
+  finished Boolean
+  grade Decimal?
+}
+
+model Question {
+  id String @id @default(cuid())
+  test McTest @relation(fields: [testId], references: [id])
+  testId String
+  title String
+  a String
+  b String
+  c String
+  d String
+  e String
+  answer String
+  userAnswer String?
+  correct Boolean?
+}
+
+model FlashCardSet {
+  id String @id @default(cuid())
+  name String
+  prompt String
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  flashCards FlashCard[]
+}
+
+model FlashCard {
+  id String @id @default(cuid())
+  name String
+  prompt String
+  flashCardSet FlashCardSet @relation(fields: [flashCardSetId], references: [id])
+  flashCardSetId String
+  question String
+  answer String
+}
+
+model WrittenTest {
+  id String @id @default(cuid())
+  name String
+  prompt String
+  finished Boolean
+  grade Decimal?
+  userAnswer String?
+  user User @relation(fields: [userId], references: [id])
+  userId String
+}
+

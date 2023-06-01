@@ -11,7 +11,7 @@ const signin = () => {
   return (
     <main className="w-screen h-screen flex justify-center items-center">
       <button 
-        className="px-10 py-4 rounded-md shadow-2xl border flex space-x-5 items-center hover:bg-neutral-100 duration-300"
+        className="px-10 py-4 rounded-md bg-white text-black flex space-x-5 items-center hover:opacity-80 duration-300"
         onClick={() => signIn('google', { callbackUrl })}
       >
         <FcGoogle className="text-3xl"/>
