@@ -69,18 +69,18 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
     ];
 
     if (mathSubjects.includes(subject)) {
-      return <TbMathIntegralX className="text-6xl"/>
+      return <TbMathIntegralX/>
     }
     if (englishSubjects.includes(subject)) {
-      return <TbBooks className="text-6xl"/>
+      return <TbBooks/>
     }
     if (scienceSubjects.includes(subject)) {
-      return <TbAtom className="text-6xl"/>
+      return <TbAtom/>
     }
     if (socialStudiesSubjects.includes(subject)) {
-      return <TbBuildingBank className="text-6xl"/>
+      return <TbBuildingBank/>
     }
-    return <TbSchool className="text-3xl"/>
+    return <TbSchool/>
   }
 
   const [loading, setLoading] = useState<boolean>(true)
@@ -106,11 +106,13 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
         <>
           {
             worksheet == undefined ? redirect("/user/dashboard") :
-            <div className="flex-col flex space-y-7 p-10 lg:w-1/2">
+            <div className="flex-col flex space-y-7 p-6 lg:w-1/2">
               <div className="flex flex-col space-y-5">
                 <div className="flex items-center space-x-3.5">
-                  {getIcon(worksheet.subject)}
-                  <h1 className="font-bold text-5xl">{worksheet?.title}</h1>
+                  <div className="text-3xl md:text-6xl">
+                    {getIcon(worksheet.subject)}
+                  </div>
+                  <h1 className="font-bold text-3xl md:text-5xl">{worksheet?.title}</h1>
                 </div>
                 <div className="flex items-center space-x-4 text-xs">
                   <div className="p-2.5 rounded-md border border-neutral-500 text-neutral-500">
@@ -121,7 +123,7 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
                   </div>
                 </div>
               </div>
-              <object data={worksheet?.pdfLink} type="application/pdf" className="h-[40rem]"/>
+              <iframe src={worksheet?.pdfLink} className="h-[40rem]"/>
             </div>
           }
         </>

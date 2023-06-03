@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import {TbArrowLeft, TbBellSchool, TbChevronRight, TbHeading, TbInfoCircle, TbNumbers, TbPencil } from "react-icons/tb"
+import {TbArrowLeft, TbBellSchool, TbChevronRight, TbHeading, TbNumbers, TbPencil } from "react-icons/tb"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
