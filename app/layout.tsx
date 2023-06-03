@@ -3,8 +3,8 @@ import Provider from './components/Provider'
 import './globals.css'
 
 export const metadata = {
-  title: 'Better Speech',
-  description: 'An app that helps make your speeches better!',
+  title: 'worksheetai',
+  description: 'Get a worksheet with AI. Fast.',
 }
 
 export default function RootLayout({
