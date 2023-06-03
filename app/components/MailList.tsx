@@ -24,7 +24,7 @@ const MailList = () => {
 
   return (
     <>
-      <section className="w-screen h-screen flex justify-center items-center mt-32">
+      <section id="mail-list" className="w-screen h-screen flex justify-center items-center mt-32">
         <div className="flex flex-col space-y-8 items-center p-6">
           <h3 className="font-bold text-3xl md:text-4xl text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Boost your productivity. Join the waitlist today to use the app.</h3>
           <p className="font-medium max-w-md text-center">We are in closed beta currently. Enter your email on the waitlist for a chance to try it out!</p>

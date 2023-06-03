@@ -17,10 +17,10 @@ export default function Home() {
           <p className="md:text-xl max-w-3xl text-center font-medium">Stop wasting time scowering the internet for useless worksheets, use AI to create the one for you so you can focus on the actual worksheet</p>
           <div className="flex space-x-3 items-center">
             {/* <Link href="/about" className="px-4 py-2 font-medium">About</Link> */}
-            <Link href="/user/dashboard" className="font-medium flex space-x-2 items-center py-2 px-4 rounded-md bg-white text-black hover:bg-opacity-80 duration-300">
+            <a href="#mail-list" className="font-medium flex space-x-2 items-center py-2 px-4 rounded-md bg-white text-black hover:bg-opacity-80 duration-300">
               <p>Get Started</p>
               <FiArrowRight/>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
