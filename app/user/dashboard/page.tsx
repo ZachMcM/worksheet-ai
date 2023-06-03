@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("https://www.worksheetai.app/api/get-all-worksheets")
+      const res = await fetch("/api/get-all-worksheets")
       const data = await res.json()
       setWorksheets(data.worksheets)
       setFilteredWorksheetes(data.worksheets)
@@ -79,7 +79,7 @@ const Dashboard = () => {
             <FiPlus className="text-xl"/>
           </Link>
         </div>
-        <div className="p-10 w-full">
+        <div className="p-6 md:p-10 w-full">
           <div className={`${grid && "lg:grid lg:grid-cols-3 lg:gap-10 lg:space-y-0"} flex flex-col space-y-10`}>
             {
               loading ? 

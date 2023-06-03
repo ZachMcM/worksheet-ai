@@ -89,7 +89,7 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     const getWorksheet = async () => {
       const worksheetId = params.id
-      const res = await fetch(`https://www.worksheetai.app/api/get-worksheet?worksheetId=${worksheetId}`)
+      const res = await fetch(`/api/get-worksheet?worksheetId=${worksheetId}`)
       const data = await res.json()
       setWorksheet(data.worksheet)
       console.log(data.worksheet)
@@ -123,7 +123,7 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
                   </div>
                 </div>
               </div>
-              <iframe src={worksheet?.pdfLink} className="h-[40rem]"/>
+              <embed src={worksheet?.pdfLink} type="application/pdf" className="h-[40rem]"/>
             </div>
           }
         </>

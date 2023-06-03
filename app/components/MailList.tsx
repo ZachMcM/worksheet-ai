@@ -10,7 +10,7 @@ const MailList = () => {
   const submitEmail = async () => {
     const re = /\S+@\S+\.\S+/
       if (email && re.test(email)) {
-        const res = await fetch(`https://www.worksheetai.app/api/new-waitlist?email=${email}`, {
+        const res = await fetch(`/api/new-waitlist?email=${email}`, {
           method: 'POST'
         })
         if (res.status != 400) {
