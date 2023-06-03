@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("https://worksheetai.app/api/get-all-worksheets")
+      const res = await fetch("https://www.worksheetai.app/api/get-all-worksheets")
       const data = await res.json()
       setWorksheets(data.worksheets)
       setFilteredWorksheetes(data.worksheets)

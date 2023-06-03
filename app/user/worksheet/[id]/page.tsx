@@ -89,7 +89,7 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     const getWorksheet = async () => {
       const worksheetId = params.id
-      const res = await fetch(`https://worksheetai.app/api/get-worksheet?worksheetId=${worksheetId}`)
+      const res = await fetch(`https://www.worksheetai.app/api/get-worksheet?worksheetId=${worksheetId}`)
       const data = await res.json()
       setWorksheet(data.worksheet)
       console.log(data.worksheet)

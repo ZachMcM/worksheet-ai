@@ -33,7 +33,7 @@ const New = () => {
       console.log("Worksheet Created")
       setLoading(true)
       const queries = `?subject=${subject}&topic=${topic}&title=${title}&num=${num}`
-      const res = await fetch(`https://worksheetai.app/api/new-worksheet${queries}`, {
+      const res = await fetch(`https://www.worksheetai.app/api/new-worksheet${queries}`, {
         method: "POST"
       })
       if (res.status == 400) {
