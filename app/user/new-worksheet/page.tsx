@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 
-import {TbArrowLeft, TbBellSchool, TbChevronRight, TbInfoCircle, TbNumbers, TbPencil } from "react-icons/tb"
+import {TbArrowLeft, TbBellSchool, TbChevronRight, TbHeading, TbInfoCircle, TbNumbers, TbPencil } from "react-icons/tb"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
-import Image from "next/image"
+import Router from "next/router"
 import Loading from "@/app/components/Loading"
+import { Worksheet } from "@prisma/client"
 
 const New = () => {
   const { data: session } = useSession({
@@ -16,39 +17,62 @@ const New = () => {
         redirect('/signin?callbackUrl=/user/dashboard')
     },
   })
-
+  const [title, setTitle] = useState<string>('') 
   const [subject, setSubject] = useState<string>('')
   const [topic, setTopic] = useState<string>('')
-  const [num, setNum] = useState<number>(3)
+  const [num, setNum] = useState<number>(10)
   const [loading, setLoading] = useState<boolean>(false)
+  const [worksheetCreated, setWorksheetCreated] = useState<boolean>(false)
+  const [worksheet, setWorksheet] = useState<Worksheet>()
 
-  const createTest = async () => {
-    if (subject && topic) {
+  const createWorksheet = async () => {
+    if (subject && topic && title) {
+      setSubject('')
+      setTopic('')
       console.log(num)
-      console.log("Test Created")
+      console.log("Worksheet Created")
       setLoading(true)
-      console.time()
-      const res = await fetch(`http://localhost:3000/api/new-test?subject=${subject}&topic=${topic}`, {
+      const queries = `?subject=${subject}&topic=${topic}&title=${title}&num=${num}`
+      const res = await fetch(`https://worksheetai.app/api/new-worksheet${queries}`, {
         method: "POST"
       })
+      if (res.status == 400) {
+        Router.reload()
+        console.log(res.json())
+        return
+      }
       const data = await res.json()
       console.log(data)
-      console.timeEnd()
+      setWorksheet(data.newWorksheet)
       setLoading(false)
+      setWorksheetCreated(true)
     } else {
       console.log("Enter valid inputs")
     }
   }
 
   return (
+    !worksheetCreated ?
     <section className="w-full">
       <div className="py-8 md:py-14 justify-center flex space-y-10">
         <div className="flex-col flex space-y-7 p-10 lg:w-1/2">
-          <h1 className="font-bold text-5xl">Create a new test</h1>
+          <h1 className="font-bold text-5xl">Create a new worksheet</h1>
           <div className="flex flex-col space-y-7">
             <div className="flex flex-col space-y-5">
               <div className="flex flex-col space-y-2">
-                <h3 className="font-medium text-xl">Subject/Class</h3>
+                <h3 className="font-medium text-xl">Title</h3>
+                <div className="flex space-x-1.5 items-center p-3.5 rounded-md border border-neutral-500 focus-within:border-white duration-300">
+                  <TbHeading className="text-xl text-neutral-500"/>
+                  <input 
+                    placeholder="Factoring Worksheet 1"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="bg-transparent outline-none border-none placeholder:text-neutral-500 w-full"
+                  />
+                </div>  
+              </div>
+              <div className="flex flex-col space-y-2">
+                <h3 className="font-medium text-xl">Subject</h3>
                 <div className="flex items-center space-x-1.5 p-3.5 rounded-md border border-neutral-500 focus-within:border-white duration-300">
                   <TbBellSchool className="text-xl text-neutral-500"/>
                   <input 
@@ -78,10 +102,9 @@ const New = () => {
                   <TbNumbers className="text-xl text-neutral-500"/>
                   <input 
                     type="number"
+                    max={30}
                     value={num}
-                    min={3}
-                    max={10}
-                    onChange={(e) => setNum(parseInt(e.target.value) || 3)}
+                    onChange={(e) => setNum(parseInt(e.target.value))}
                     className="bg-transparent outline-none border-none placeholder:text-neutral-500 w-full"
                   />
                 </div>  
@@ -89,32 +112,19 @@ const New = () => {
             </div>
             <button 
               className="p-2.5 rounded-md text-black hover:opacity-80 duration-300 bg-white flex space-x-1.5 items-center font-medium w-fit"
-              onClick={createTest}
+              onClick={createWorksheet}
             >
               <p>Submit</p>
               <TbChevronRight className="text-xl"/>
             </button> 
-            <div className="flex flex-col space-y-3">
-              <div className="bg-red-50 rounded-md p-3.5 text-red-800 flex items-center space-x-1.5">
-                <TbInfoCircle className="text-xl"/>
-                <p><span className="font-medium">Danger Alert!</span> The AI might error with mathematics</p>
-              </div>
-              <div className="bg-yellow-50 rounded-md p-3.5 text-yellow-800 flex items-center space-x-1.5">
-                <TbInfoCircle className="text-xl"/>
-                <p><span className="font-medium">Warning Alert!</span> Make sure the specify your topic and subject completely</p>
-              </div>
-              <div className="bg-blue-50 rounded-md p-3.5 text-blue-800 flex items-center space-x-1.5">
-                <TbInfoCircle className="text-xl"/>
-                <p><span className="font-medium">Info Alert!</span> The more questions the slower the generation</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
       {
         loading && <Loading/>
       }
-    </section>
+    </section> :
+    redirect(`/user/worksheet/${worksheet?.id}`)
   )
 }
 

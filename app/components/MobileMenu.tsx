@@ -12,7 +12,7 @@ export const MobileMenu = ({setMobileMenu} : any) => {
     <nav className="w-full h-screen fixed bottom-0 left-0 z-50 right-0 bg-black py-5 px-6">
       <div className="flex justify-between items-center">
         <div className="flex space-x-5 items-center text-lg md:text-2xl">
-            <h1 className="font-bold">study<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">ai</span></h1>
+            <h1 className="font-bold">worksheet<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">ai</span></h1>
             {
               session && session.user && session.user.image &&
               <>

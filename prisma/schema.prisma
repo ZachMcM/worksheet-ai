@@ -43,8 +43,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  mcTests McTest[]
-  writtenTests WrittenTest[]
+  worksheets Worksheet[]
 }
 
 model VerificationToken {
@@ -55,36 +54,21 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model McTest {
+model Worksheet {
   id String @id @default(cuid())
-  name String
-  prompt String
-  user User @relation(fields: [userId], references: [id])
-  userId String
-  questions Question[]
-  finished Boolean
-  grade Decimal?
-}
-
-model Question {
-  id String @id @default(cuid())
-  test McTest @relation(fields: [testId], references: [id])
-  testId String
   title String
-  choices String[]
-  correctAnswer String
-  userAnswer String?
-  correct Boolean?
-}
-
-model WrittenTest {
-  id String @id @default(cuid())
-  name String
-  prompt String
-  finished Boolean
-  grade Decimal?
-  userAnswer String?
+  subject String
+  topic String
   user User @relation(fields: [userId], references: [id])
   userId String
+  pdfLink String
+  stringData String
+  createdAt DateTime @default(now())
 }
 
+
+model WaitlistEmail {
+  id String @id @default(cuid())
+  email String
+  createdAt DateTime @default(now())
+}
