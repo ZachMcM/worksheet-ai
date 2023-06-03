@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package && prisma generate"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.6",
