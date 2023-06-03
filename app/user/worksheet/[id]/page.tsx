@@ -123,7 +123,7 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
                   </div>
                 </div>
               </div>
-              <embed src={worksheet?.pdfLink} type="application/pdf" className="h-[40rem]"/>
+              <iframe src={worksheet?.pdfLink} className="h-[40rem] max-w-full"/>
             </div>
           }
         </>
