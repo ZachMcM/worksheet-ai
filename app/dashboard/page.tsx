@@ -33,7 +33,7 @@ const Dashboard = () => {
       const data = await res.json()
       const unorganizedWorksheets: Worksheet[] = data.worksheets
       const organizedWorksheets = unorganizedWorksheets.sort((a, b) => {
-        return a.updatedAt.getTime() - b.updatedAt.getTime()
+        return (new Date(a.updatedAt)).getTime() - (new Date(b.updatedAt)).getTime()
       })
       setWorksheets(organizedWorksheets)
       setFilteredWorksheetes(organizedWorksheets)

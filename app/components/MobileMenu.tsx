@@ -1,6 +1,6 @@
 'use client'
 
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 import { HiOutlineX } from "react-icons/hi"
@@ -63,7 +63,7 @@ export const MobileMenu = ({setMobileMenu} : any) => {
             <p>Sign In</p>
           </Link>
         }
-        <Link href="/about" className="hover:opacity-80 flex items-center justify-between pb-5 border-b border-neutral-500 text-neutral-500">About</Link>
+        {/* <Link href="/about" className="hover:opacity-80 flex items-center justify-between pb-5 border-b border-neutral-500 text-neutral-500">About</Link> */}
       </div>
     </nav>
   )
