@@ -47,7 +47,7 @@ export const MobileMenu = ({setMobileMenu} : any) => {
             />
           </div>
         }
-        <Link href="/user/dashboard" className="hover:opacity-80 flex items-center justify-between pb-5 border-b border-neutral-500 text-neutral-500">Dashboard</Link>
+        <Link href="/dashboard" className="hover:opacity-80 flex items-center justify-between pb-5 border-b border-neutral-500 text-neutral-500">Dashboard</Link>
         {
           session && session.user ?
           <button 
@@ -57,7 +57,7 @@ export const MobileMenu = ({setMobileMenu} : any) => {
             <p>Sign Out</p>
           </button> : 
           <Link 
-            href='/signin?callbackUrl=/user/dashboard'
+            href='/signin?callbackUrl=/dashboard'
             className="hover:opacity-80 flex items-center justify-between pb-5 border-b border-neutral-500 text-neutral-500"
           >
             <p>Sign In</p>

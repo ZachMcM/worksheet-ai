@@ -6,7 +6,7 @@ import { TbBooks, TbRobot, TbRun, TbSchool } from "react-icons/tb"
 
 export default function Home() {
   return (
-    <main>
+    <div>
       <Navbar/>
       <section className="mt-32 w-full flex justify-center p-6 text-center">
         <div className="w-full flex items-center flex-col space-y-6">
@@ -62,6 +62,6 @@ export default function Home() {
         </div>
       </section>
       <MailList/>
-    </main>
+    </div>
   )
 }

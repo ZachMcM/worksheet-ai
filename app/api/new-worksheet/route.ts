@@ -32,7 +32,8 @@ export async function POST(request: NextRequest) {
             topic: topic,
             userId: user.id,
             pdfLink: pdfLink,
-            stringData: stringData
+            stringData: stringData,
+            updatedAt: new Date()
           }
         })
         return NextResponse.json({newWorksheet})

@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next"
-import { Worksheet } from "@prisma/client";
-import { use } from "react";
 
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions)

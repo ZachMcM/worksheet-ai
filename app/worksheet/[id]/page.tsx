@@ -4,13 +4,14 @@ import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import { Worksheet } from "@prisma/client"
-import { TbAtom, TbBooks, TbBuildingBank, TbMathIntegralX, TbSchool } from "react-icons/tb"
+import { TbAtom, TbBooks, TbBuildingBank, TbCode, TbMathIntegralX, TbSchool, TbTrash } from "react-icons/tb"
+import WorksheetPageHeader from "@/app/components/WorksheetPageHeader"
 
 const Worksheet = ({ params }: { params: { id: string } }) => {
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
-        redirect('/signin?callbackUrl=/user/dashboard')
+        redirect('/signin?callbackUrl=/dashboard')
     },
   })
 
@@ -67,6 +68,14 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
       "English Literature",
       "English Phonetics",
     ];
+    const csSubjects: string[] = [
+      "Computer Science",
+      "Operating Systems",
+      "Object Oriented Programming",
+      "Data Structures and Algorithms",
+      "Theory of Computation",
+      "Web Development"
+    ]
 
     if (mathSubjects.includes(subject)) {
       return <TbMathIntegralX/>
@@ -80,11 +89,15 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
     if (socialStudiesSubjects.includes(subject)) {
       return <TbBuildingBank/>
     }
+    if (csSubjects.includes(subject)) {
+      return <TbCode className="text-3xl"/>
+    }
     return <TbSchool/>
   }
 
   const [loading, setLoading] = useState<boolean>(true)
   const [worksheet, setWorksheet] = useState<Worksheet>()
+  const [updateCount, setUpdateCount] = useState<number>(0)
 
   useEffect(() => {
     const getWorksheet = async () => {
@@ -96,16 +109,24 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
       setLoading(false)
     }
     getWorksheet()
-  }, [])
+  }, [updateCount])
 
   return (
     <section className="w-full">
+    {
+      worksheet && 
+      <WorksheetPageHeader 
+        worksheet={worksheet}
+        updateCount={updateCount}
+        setUpdateCount={setUpdateCount}
+      />
+    }
     <div className="py-8 md:py-14 justify-center flex space-y-10">
       {
         !loading &&
         <>
           {
-            worksheet == undefined ? redirect("/user/dashboard") :
+            worksheet == undefined || worksheet == null ? redirect("/dashboard") :
             <div className="flex-col flex space-y-7 p-6 lg:w-1/2">
               <div className="flex flex-col space-y-5">
                 <div className="flex items-center space-x-3.5">
@@ -123,7 +144,7 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
                   </div>
                 </div>
               </div>
-              <iframe src={worksheet?.pdfLink} className="h-[40rem] max-w-full"/>
+              <iframe src={worksheet.pdfLink} className="h-[40rem] max-w-full"/>
             </div>
           }
         </>

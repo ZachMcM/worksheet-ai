@@ -49,7 +49,7 @@ const MailList = () => {
       </section>
       {
         submittedEmail && 
-        <div className="w-full h-full fixed min-h-screen top-0 bottom-0 left-0 z-50 backdrop-blur-md flex justify-center items-center">
+        <div className="w-full h-full fixed min-h-screen top-0 bottom-0 left-0 z-50 bg-black/90 flex justify-center items-center">
           <div className="flex flex-col space-y-3 rounded-md p-6 bg-white text-black items-center">
             <p className="font-medium text-xl">Thank you, you are now on our waitlist!</p>
             <button

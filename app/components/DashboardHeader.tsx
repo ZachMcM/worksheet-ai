@@ -37,7 +37,7 @@ const DashboardHeader = () => {
             >
               <p>Sign Out</p>
             </button>
-            <Link href="/user/dashboard" className="border hover:opacity-80 border-neutral-500 text-neutral-500 px-4 py-2 font-medium rounded-md hover:bg-opacity-80 duration-300">Dashboard</Link>
+            <Link href="/dashboard" className="border hover:opacity-80 border-neutral-500 text-neutral-500 px-4 py-2 font-medium rounded-md hover:bg-opacity-80 duration-300">Dashboard</Link>
           </div>
           <button
             onClick={() => setMobileMenu(true)}
