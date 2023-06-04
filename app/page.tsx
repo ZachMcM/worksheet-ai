@@ -30,7 +30,7 @@ export default function Home() {
           <h3 className="font-bold text-3xl md:text-4xl">Generative AI to your advantage</h3>
           <p className="font-medium max-w-xl">We use AI to generate a pdf worksheet with just a few clicks.</p>
         </div>
-        <div className="w-full py-8 lg:py-14 md:px-14 lg:px-28 flex flex-col space-y-10 md:space-y-0 md:flex-row md:space-x-14 text-center md:text-start items-center">
+        <div className="w-full justify-center py-8 lg:py-14 md:px-14 lg:px-28 flex flex-col space-y-10 md:space-y-0 md:flex-row md:space-x-14 text-center md:text-start items-center">
           <div className="flex flex-col space-y-3 max-w-xs items-center md:items-start">
             <div className="rounded-md bg-white p-1.5 w-fit">
               <TbRun className="text-2xl text-black"/>
