@@ -60,7 +60,7 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
   return (
     !worksheetCreated ?
     <div className="w-full fixed top-0 bottom-0 left-0 bg-black/95 z-50 flex justify-center items-center p-6">
-      <div ref={ref} className="relative flex-col flex space-y-7 p-6 md:p-10 lg:w-1/2 bg-black border border-neutral-500 rounded-md">
+      <div ref={ref} className="relative flex-col flex space-y-7 p-6 md:p-10 lg:w-1/2 xl:w-1/4 bg-black border border-neutral-500 rounded-md">
         <div className="flex space-x-2 items-center">
           <TbFilePlus className="text-4xl"/>
           <h1 className="font-bold text-2xl md:text-4xl">Create a new worksheet</h1>
