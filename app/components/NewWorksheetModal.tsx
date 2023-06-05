@@ -113,7 +113,7 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
                 <TbNumbers className="text-xl text-neutral-500"/>
                 <input 
                     min={1}
-                    max={50}
+                    max={25}
                     type="range" 
                     value={num}
                     onChange={(e) => setNum(parseInt(e.target.value))}
