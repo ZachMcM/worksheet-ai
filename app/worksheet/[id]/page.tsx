@@ -90,7 +90,7 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
       return <TbBuildingBank/>
     }
     if (csSubjects.includes(subject)) {
-      return <TbCode className="text-3xl"/>
+      return <TbCode/>
     }
     return <TbSchool/>
   }
@@ -105,7 +105,12 @@ const Worksheet = ({ params }: { params: { id: string } }) => {
       const res = await fetch(`/api/get-worksheet?worksheetId=${worksheetId}`)
       const data = await res.json()
       setWorksheet(data.worksheet)
-      console.log(data.worksheet)
+      if (res.status == 400 || res.status == 500) {
+        const data = await res.json()
+        console.log(data)
+      } else {
+        console.log("Worksheet loaded")
+      }
       setLoading(false)
     }
     getWorksheet()

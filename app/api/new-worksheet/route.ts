@@ -13,33 +13,38 @@ export async function POST(request: NextRequest) {
 
     if (user) {
       const secret = process.env.API_SECRET
-      const subject = request.nextUrl.searchParams.get("subject")
-      const topic = request.nextUrl.searchParams.get("topic")
-      const title = request.nextUrl.searchParams.get("title")
-      const num = request.nextUrl.searchParams.get("num")
+      const body = await request.json()
+      const { subject, topic, title, num }: { subject: string, topic: string, title: string, num: number} = body
+      const res = await fetch(`https://worksheet-ai-api-production.up.railway.app/worksheet?secret=${secret}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+      const resData = await res.json()
+      console.log(resData)
+      const { urlToPdf, data, pathToFile }: { urlToPdf: string, data: string, pathToFile: string } = resData 
     
-      const queries = `?secret=${secret}&subject=${subject}&topic=${topic}&title=${title}&num=${num}`
-      const res = await fetch(`https://worksheet-ai-api-production.up.railway.app/worksheet${queries}`)
-      const data = await res.json()
-      const pdfLink = data.urlToPdf
-      const stringData = data.data
-    
-      if (subject && topic && title && num && pdfLink && stringData) {
+      if (subject && topic && title && num && urlToPdf && data) {
         const newWorksheet = await prisma.worksheet.create({
           data: {
             title: title,
             subject: subject,
             topic: topic,
             userId: user.id,
-            pdfLink: pdfLink,
-            stringData: stringData,
-            updatedAt: new Date()
+            pdfLink: urlToPdf,
+            stringData: data,
+            updatedAt: new Date(),
+            pathToFile: pathToFile
           }
         })
         return NextResponse.json({newWorksheet})
       } else {
         return NextResponse.json({error: "Bad Request"}, {status: 400})
       }
+      
     } else {
       return NextResponse.json({error: "Error unauthenticated request"}, {status: 400})
     }

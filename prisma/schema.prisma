@@ -56,6 +56,7 @@ model VerificationToken {
 
 model Worksheet {
   id String @id @default(cuid())
+  pathToFile String
   title String
   subject String
   topic String

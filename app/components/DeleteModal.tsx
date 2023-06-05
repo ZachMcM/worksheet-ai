@@ -15,16 +15,21 @@ const DeleteModal = ({ worksheet, setDeleteModal, updateCount, setUpdateCount }:
   const [loading, setLoading] = useState<boolean>(false)
 
   const confirmDelete = async () => {
-    console.log("delete confirmed")
+    console.log("Processing delete")
     setLoading(true)
     const res = await fetch(`/api/delete-worksheet?worksheetId=${worksheet.id}`, {
       method: "DELETE"
     })
-    const data = await res.json()
-    console.log(data.deletedWorksheet)
+    if (res.status == 400 || res.status == 500) {
+      const data = await res.json()
+      console.log(data)
+    } else {
+      "Delete confirmed"
+    }
     setLoading(false)
     setDeleteModal(false)
     setUpdateCount(updateCount + 1)
+    console.log("UI updated")
   }
   
   const ref = useDetectClickOutside({ onTriggered: closeModal})

@@ -10,13 +10,13 @@ const EditModal = ({
   setEditModal,
   setDeleteModal,
   setRenameModal,
-  notDashboard,
+  worksheetPage,
 }: {
   worksheet: Worksheet;
   setEditModal: Dispatch<SetStateAction<boolean>>;
   setDeleteModal: Dispatch<SetStateAction<boolean>>;
   setRenameModal: Dispatch<SetStateAction<boolean>>;
-  notDashboard?: boolean;
+  worksheetPage?: boolean;
 }) => {
   const closeModal = () => {
     setEditModal(false);
@@ -45,11 +45,11 @@ const EditModal = ({
   return (
     <div
       ref={ref}
-      className={`absolute md:top-0 ${
-        !notDashboard ? "md:left-12 top-14 left-[-7rem]" : "left-3 md:left-14"
+      className={`absolute ${
+        !worksheetPage ? "md:top-0 md:left-12 top-14 left-[-7rem]" : "lg:top-10 right-0 top-5 lg:right-3"
       } w-40 text-lg z-40 flex flex-col bg-white text-black rounded-md border border-neutral-500`}
     >
-      {notDashboard && (
+      {worksheetPage && (
         <a
           href={worksheet.pdfLink}
           className="px-4 py-3 hover:bg-neutral-100 text-start duration-300 flex items-center space-x-2"

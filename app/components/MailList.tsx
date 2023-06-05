@@ -14,10 +14,12 @@ const MailList = () => {
           method: 'POST'
         })
         if (res.status != 400) {
-          const data = await res.json()
-          console.log(data)
+          console.log("Added to waitlist")
           setSubmittedEmail(true)
           setEmail('')
+        } else {
+          const data = await res.json()
+          console.log(data)
         }
       }
   }

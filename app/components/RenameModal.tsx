@@ -20,8 +20,12 @@ const RenameModal = ({ worksheet, setRenameModal, updateCount, setUpdateCount } 
       const res = await fetch(`/api/update-worksheet?worksheetId=${worksheet.id}&newTitle=${input}`, {
         method: "PUT"
       })
-      const data = await res.json()
-      console.log(data.updatedWorksheet)
+      if (res.status == 400 || res.status == 500) {
+        const data = await res.json()
+        console.log(data)
+      } else {
+        console.log("Error renaming worksheet")
+      }
       setLoading(false)
       setRenameModal(false)
       setUpdateCount(updateCount + 1)

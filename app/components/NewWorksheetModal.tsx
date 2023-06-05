@@ -4,7 +4,6 @@ import { Dispatch, SetStateAction, useState } from "react"
 import { TbBellSchool, TbChevronRight, TbFilePlus, TbHeading, TbNumbers, TbPencil, TbX } from "react-icons/tb"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
-import Router from "next/router"
 import Loading from "@/app/components/Loading"
 import { Worksheet } from "@prisma/client"
 import { useDetectClickOutside } from "react-detect-click-outside"
@@ -35,20 +34,24 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
     if (subject && topic && title) {
       setSubject('')
       setTopic('')
-      console.log(num)
-      console.log("Worksheet Created")
+      console.log("Creating new worksheet")
       setLoading(true)
-      const queries = `?subject=${subject}&topic=${topic}&title=${title}&num=${num}`
-      const res = await fetch(`/api/new-worksheet${queries}`, {
-        method: "POST"
-      })
-      if (res.status == 400) {
-        Router.reload()
-        console.log(res.json())
-        return
+      const reqBody = {
+        subject: subject,
+        title: title,
+        topic: topic,
+        num: num
       }
+      const res = await fetch(`/api/new-worksheet`, {
+        method: "POST",
+        body: JSON.stringify(reqBody)
+      })
       const data = await res.json()
-      console.log(data)
+      if (res.status == 400 || res.status == 500) {
+        console.log(data)
+      } else {
+        console.log("New worksheet created")
+      }
       setWorksheet(data.newWorksheet)
       setLoading(false)
       setWorksheetCreated(true)
@@ -60,7 +63,7 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
   return (
     !worksheetCreated ?
     <div className="w-full fixed top-0 bottom-0 left-0 bg-black/95 z-50 flex justify-center items-center p-6">
-      <div ref={ref} className="relative flex-col flex space-y-7 p-6 md:p-10 lg:w-1/2 xl:w-1/4 bg-black border border-neutral-500 rounded-md">
+      <div ref={ref} className="relative flex-col flex space-y-7 p-6 md:p-10 lg:w-1/2 2xl:w-1/4 bg-black border border-neutral-500 rounded-md">
         <div className="flex space-x-2 items-center">
           <TbFilePlus className="text-4xl"/>
           <h1 className="font-bold text-2xl md:text-4xl">Create a new worksheet</h1>
@@ -94,7 +97,7 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
             </div>
             <div className="flex flex-col space-y-2">
               <h3 className="font-medium text-xl">Topic </h3>
-              <div className="flex space-x-1.5 p-3.5 rounded-md border border-neutral-500 focus-within:border-white duration-300">
+              <div className="flex space-x-1.5 p-3.5 items-center rounded-md border border-neutral-500 focus-within:border-white duration-300">
                 <TbPencil className="text-xl text-neutral-500"/>
                 <input 
                   value={topic}
@@ -106,15 +109,17 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
             </div>
             <div className="flex flex-col space-y-2">
               <h3 className="font-medium text-xl">Number of Questions</h3>
-              <div className="flex space-x-1.5 p-3.5 rounded-md border border-neutral-500 focus-within:border-white duration-300">
+              <div className="flex space-x-5 items-center p-3.5">
                 <TbNumbers className="text-xl text-neutral-500"/>
                 <input 
-                  type="number"
-                  max={30}
-                  value={num}
-                  onChange={(e) => setNum(parseInt(e.target.value))}
-                  className="bg-transparent outline-none border-none placeholder:text-neutral-500 w-full"
+                    min={1}
+                    max={50}
+                    type="range" 
+                    value={num}
+                    onChange={(e) => setNum(parseInt(e.target.value))}
+                    className="w-full h-1.5 rounded-lg appearance-none cursor-pointer bg-neutral-500 accent-neutral-600"
                 />
+                <p className="font-semibold text-lg">{num}</p>
               </div>  
             </div>
           </div>

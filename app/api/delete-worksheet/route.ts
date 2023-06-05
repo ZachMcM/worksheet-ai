@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../auth/[...nextauth]/route";
 import prisma from "@/prisma/client";
+import { supabase } from "@/lib/supabaseClient";
 
 export async function DELETE(request: NextRequest) {
   const session = await getServerSession(authOptions)
@@ -29,6 +30,12 @@ export async function DELETE(request: NextRequest) {
               id: worksheetId
             }
           })
+          const { data, error } = await supabase.storage.from("pdfs").remove([`${deletedWorksheet.pathToFile}`])
+          if (error) {
+            console.log(error)
+          } else {
+            console.log(data)
+          }
           return NextResponse.json({ deletedWorksheet })
         } else {
           return NextResponse.json({error: "Unaunthenticated Request"}, {status: 400})
