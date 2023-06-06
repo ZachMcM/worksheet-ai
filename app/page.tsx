@@ -10,9 +10,8 @@ export default function Home() {
             <p>Just shipped v1.0.0</p>
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Get a worksheet. Fast.</h1>
-          <p className="md:text-xl max-w-3xl text-center font-medium">Stop wasting time scowering the internet for useless worksheets, use AI to create the one for you so you can focus on the actual worksheet</p>
+          <p className="md:text-xl max-w-3xl text-center font-medium">Stop wasting time searching the internet for useless worksheets, use AI to create the one for you so you can focus on the actual worksheet</p>
           <div className="flex space-x-3 items-center">
-            {/* <Link href="/about" className="px-4 py-2 font-medium">About</Link> */}
             <Link href="/dashboard" className="font-medium flex space-x-2 items-center py-2 px-4 rounded-md bg-white text-black hover:bg-opacity-80 duration-300">
               <p>Get Started</p>
               <TbArrowRight className="text-xl"/>
