@@ -52,6 +52,12 @@ const Navbar = () => {
               >
                 <p>Dashboard</p>
               </Link>
+              <Link
+                href="/feedback"
+                className="border hover:opacity-80 border-neutral-500 text-neutral-500 px-4 py-2 font-medium rounded-md hover:bg-opacity-80 duration-300"
+              >
+                <p>Feedback</p>
+              </Link>
             </>
           ) : (
             <Link
