@@ -5,8 +5,8 @@ import { useEffect, useState } from "react"
 import { uid } from "uid"
 import { Worksheet } from "@prisma/client"
 import WorksheetCard from "@/app/components/WorksheetCard"
-import DashboardHeader from "../components/DashboardHeader"
 import NewWorkSheetModal from "../components/NewWorksheetModal"
+import Navbar from "../components/Navbar"
 import { TbMoodConfuzed } from "react-icons/tb"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
@@ -53,7 +53,6 @@ const Dashboard = () => {
 
   return (
     <section>
-      <DashboardHeader/>
       <div className="py-10 px-5 md:p-20 w-full flex flex-col space-y-5 md:space-y-10 items-center">
         <div className="flex space-x-3 md:space-x-2 w-full justify-center">
           <div className="flex items-center w-full bg-black border border-neutral-500 focus-within:border-white duration-300 rounded-md">

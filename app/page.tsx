@@ -1,13 +1,9 @@
-import Navbar from "./components/Navbar"
 import Link from "next/link"
-import { FiArrowRight } from "react-icons/fi"
-import MailList from "./components/MailList"
-import { TbBooks, TbRobot, TbRun, TbSchool } from "react-icons/tb"
+import { TbArrowRight, TbBooks, TbRobot, TbRun, TbSchool } from "react-icons/tb"
 
 export default function Home() {
   return (
     <div>
-      <Navbar/>
       <section className="mt-32 w-full flex justify-center p-6 text-center">
         <div className="w-full flex items-center flex-col space-y-6">
           <div className="text-neutral-500 border border-neutral-500 rounded-full py-2 px-4 text-xs">
@@ -17,16 +13,22 @@ export default function Home() {
           <p className="md:text-xl max-w-3xl text-center font-medium">Stop wasting time scowering the internet for useless worksheets, use AI to create the one for you so you can focus on the actual worksheet</p>
           <div className="flex space-x-3 items-center">
             {/* <Link href="/about" className="px-4 py-2 font-medium">About</Link> */}
-            <a href="#mail-list" className="font-medium flex space-x-2 items-center py-2 px-4 rounded-md bg-white text-black hover:bg-opacity-80 duration-300">
+            <Link href="/dashboard" className="font-medium flex space-x-2 items-center py-2 px-4 rounded-md bg-white text-black hover:bg-opacity-80 duration-300">
               <p>Get Started</p>
-              <FiArrowRight/>
-            </a>
+              <TbArrowRight className="text-xl"/>
+            </Link>
           </div>
+        </div>
+      </section>
+      <section className="my-32 w-full flex flex-col space-y-8 justify-center items-center">
+        <h3 className="font-bold text-3xl md:text-4xl">Yep. It really is that easy.</h3>
+        <div className="p-5 w-2/5 rounded-md bg-black border border-neutral-500">
+          <video autoPlay={true} loop={true} muted={true} src="/easy.mov" className="w-full"/>
         </div>
       </section>
       <section className="w-full flex flex-col space-y-10 items-center mt-32">
         <div className="flex flex-col space-y-4 text-center p-6">
-          <p className="text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Easy</p>
+          <p className="text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Natural language processing</p>
           <h3 className="font-bold text-3xl md:text-4xl">Generative AI to your advantage</h3>
           <p className="font-medium max-w-xl">We use AI to generate a pdf worksheet with just a few clicks.</p>
         </div>
@@ -61,7 +63,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <MailList/>
     </div>
   )
 }

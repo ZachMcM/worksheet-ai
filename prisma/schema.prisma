@@ -44,6 +44,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   worksheets Worksheet[]
+  feedbacks Feedback[]
 }
 
 model VerificationToken {
@@ -68,9 +69,12 @@ model Worksheet {
   updatedAt DateTime
 }
 
-
-model WaitlistEmail {
+model Feedback {
   id String @id @default(cuid())
-  email String
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  content String
+  title String
+  numStars Int
   createdAt DateTime @default(now())
 }

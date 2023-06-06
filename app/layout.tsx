@@ -1,4 +1,5 @@
 import Footer from './components/Footer'
+import Navbar from './components/Navbar'
 import Provider from './components/Provider'
 import './globals.css'
 
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body className='bg-neutral-950 text-white overflow-x-hidden max-w-full'>
         <Provider>
           <main className='min-h-screen'>
+            <Navbar/>
             {children}
           </main>
         </Provider>
