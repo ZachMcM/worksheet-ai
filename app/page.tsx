@@ -21,7 +21,7 @@ export default function Home() {
       </section>
       <section className="my-32 w-full flex flex-col space-y-8 justify-center items-center">
         <h3 className="font-bold text-3xl md:text-4xl">Yep. It really is that easy.</h3>
-        <div className="p-5 w-2/5 rounded-md bg-black border border-neutral-500">
+        <div className="p-5 w-full md:w-3/5 lg:w-2/5 rounded-md bg-black border border-neutral-500">
           <video autoPlay={true} loop={true} muted={true} src="/easy.mov" className="w-full"/>
         </div>
       </section>
