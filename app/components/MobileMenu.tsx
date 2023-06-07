@@ -3,7 +3,6 @@
 import { useSession, signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect } from "react"
 import { HiOutlineX } from "react-icons/hi"
 
 export const MobileMenu = ({setMobileMenu} : any) => {
