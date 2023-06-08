@@ -1,6 +1,6 @@
 'use client'
 
-import { useSession, signOut } from "next-auth/react"
+import { useSession, signOut, signIn } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 import { HiOutlineX } from "react-icons/hi"
@@ -56,12 +56,12 @@ export const MobileMenu = ({setMobileMenu} : any) => {
           >
             <p>Sign Out</p>
           </button> : 
-          <Link 
-            href='/signin?callbackUrl=/dashboard'
-            className="hover:opacity-80 flex items-center justify-between pb-5 border-b border-neutral-500 text-neutral-500"
+          <button 
+          className="hover:opacity-80 flex items-center justify-between pb-5 border-b border-neutral-500 text-neutral-500"
+          onClick={() => signIn("google")}
           >
             <p>Sign In</p>
-          </Link>
+          </button>
         }
         <Link href="/feedback" onClick={() => setMobileMenu(false)} className="hover:opacity-80 flex items-center justify-between pb-5 border-b border-neutral-500 text-neutral-500">Feedback</Link>
       </div>

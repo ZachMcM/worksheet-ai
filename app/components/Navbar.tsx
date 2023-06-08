@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, signIn } from "next-auth/react";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu";
 import { useState } from "react";
@@ -60,12 +60,12 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-            <Link
-              href="/signin?callback=/dashboard"
+            <button
               className="bg-white text-black px-4 py-2 font-medium rounded-md hover:bg-opacity-80 duration-300"
+              onClick={() => signIn("google")}
             >
-              Sign In
-            </Link>
+              <p>Sign In</p>
+            </button>
           )}
         </div>
         <button onClick={() => setMobileMenu(true)} className="md:hidden">
