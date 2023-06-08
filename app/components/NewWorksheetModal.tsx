@@ -12,7 +12,7 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
-        redirect('/signin?callbackUrl=/dashboard')
+      redirect('/api/auth/signin?callbackUrl=/dashboard')
     },
   })
 

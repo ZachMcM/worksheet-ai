@@ -2,7 +2,7 @@
 
 import { Worksheet } from "@prisma/client"
 import Link from "next/link"
-import { TbArrowLeft, TbAtom, TbBooks, TbBuildingBank, TbChevronDown, TbCode, TbDots, TbEdit, TbMathIntegralX, TbSchool, TbShare3, TbTrash } from "react-icons/tb"
+import { TbArrowLeft, TbAtom, TbBooks, TbBuildingBank, TbCode, TbDotsVertical, TbMathIntegralX, TbSchool } from "react-icons/tb"
 import { Dispatch, SetStateAction, useState } from "react"
 import RenameModal from "./RenameModal"
 import DeleteModal from "./DeleteModal"
@@ -105,10 +105,11 @@ const WorksheetPageHeader = ({ worksheet, updateCount, setUpdateCount }: { works
       </div>
       <div className="relative">
         <button 
-          className="flex items-center hover:opacity-80 duration-300 place-self-start"
+          className="flex items-center hover:opacity-80 duration-300 place-self-start space-x-2"
           onClick={() => setEditModal(true)}
         >
-          <TbDots className="text-xl md:text-2xl"/>
+          <p className="font-medium text-sm">More</p>
+          <TbDotsVertical className="text-xl md:text-2xl"/>
         </button>
         {
           editModal &&
