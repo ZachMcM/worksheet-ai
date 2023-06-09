@@ -5,8 +5,9 @@ import { TbBellSchool, TbChevronRight, TbFilePlus, TbHeading, TbNumbers, TbPenci
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import Loading from "@/app/components/Loading"
-import { Worksheet } from "@prisma/client"
 import { useDetectClickOutside } from "react-detect-click-outside"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { postWorksheet } from "../api-calls"
 
 const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dispatch<SetStateAction<boolean>>}) => {
   const { data: session } = useSession({
@@ -14,6 +15,15 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
     onUnauthenticated() {
       redirect('/api/auth/signin?callbackUrl=/dashboard')
     },
+  })
+
+  const queryClient = useQueryClient()
+
+  const mutation = useMutation({
+    mutationFn: postWorksheet,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['worksheets'] })
+    }
   })
 
   const closeModal = () => {
@@ -26,42 +36,8 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
   const [subject, setSubject] = useState<string>('')
   const [topic, setTopic] = useState<string>('')
   const [num, setNum] = useState<number>(10)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [worksheetCreated, setWorksheetCreated] = useState<boolean>(false)
-  const [worksheet, setWorksheet] = useState<Worksheet>()
-
-  const createWorksheet = async () => {
-    if (subject && topic && title) {
-      setSubject('')
-      setTopic('')
-      console.log("Creating new worksheet")
-      setLoading(true)
-      const reqBody = {
-        subject: subject,
-        title: title,
-        topic: topic,
-        num: num
-      }
-      const res = await fetch(`/api/new-worksheet`, {
-        method: "POST",
-        body: JSON.stringify(reqBody)
-      })
-      const data = await res.json()
-      if (res.status == 400 || res.status == 500) {
-        console.log(data)
-      } else {
-        console.log("New worksheet created")
-      }
-      setWorksheet(data.newWorksheet)
-      setLoading(false)
-      setWorksheetCreated(true)
-    } else {
-      console.log("Enter valid inputs")
-    }
-  }
 
   return (
-    !worksheetCreated ?
     <div className="w-full fixed top-0 bottom-0 left-0 bg-black/95 z-50 flex justify-center items-center p-6">
       <div ref={ref} className="relative flex-col flex space-y-7 p-6 md:p-10 lg:w-1/2 2xl:w-1/4 bg-black border border-neutral-500 rounded-md">
         <div className="flex space-x-2 items-center">
@@ -126,7 +102,19 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
           <div className="flex space-x-5 items-center">
             <button 
               className="p-2.5 rounded-md text-black hover:opacity-80 duration-300 bg-white flex space-x-1.5 items-center font-medium w-fit"
-              onClick={createWorksheet}
+              onClick={() => {
+                if (subject && topic && title) {
+                  setSubject('')
+                  setTopic('')
+                  setNum(10)
+                  mutation.mutate({
+                    subject: subject,
+                    title: title,
+                    topic: topic,
+                    num: num
+                  })
+                }
+              }}
             >
               <p>Submit</p>
               <TbChevronRight className="text-xl"/>
@@ -141,11 +129,10 @@ const NewWorkSheetModal = ({ setNewWorksheetModal }: { setNewWorksheetModal: Dis
           </div>
         </div>
       </div>
-      {
-        loading && <Loading/>
-      }
-    </div> :
-    redirect(`/worksheet/${worksheet?.id}`)
+      { mutation.isLoading && <Loading/> }
+      { mutation.isSuccess && redirect(`/worksheet/${mutation.data.id}`)}
+    </div>
+    
   )
 }
 

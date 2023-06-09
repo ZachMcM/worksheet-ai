@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { Feedback } from "@prisma/client";
+import { authOptions } from "../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth/next"
 
 export async function GET(request: NextRequest) {
-  if (process.env.SERVER_API_SECRET == request.nextUrl.searchParams.get("secret")) {
+  const session = await getServerSession(authOptions)
+
+  if (session) {
     const feedbackEntries: Feedback[] = await prisma.feedback.findMany({
       take: 10
     })

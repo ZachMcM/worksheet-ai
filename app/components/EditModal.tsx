@@ -7,12 +7,14 @@ import { TbChevronDown, TbEdit, TbShare3, TbTrash } from "react-icons/tb";
 
 const EditModal = ({
   worksheet,
+  editModal,
   setEditModal,
   setDeleteModal,
   setRenameModal,
   worksheetPage,
 }: {
   worksheet: Worksheet;
+  editModal: boolean,
   setEditModal: Dispatch<SetStateAction<boolean>>;
   setDeleteModal: Dispatch<SetStateAction<boolean>>;
   setRenameModal: Dispatch<SetStateAction<boolean>>;
@@ -47,7 +49,7 @@ const EditModal = ({
       ref={ref}
       className={`absolute ${
         !worksheetPage ? "md:top-0 md:left-12 top-14 left-[-7rem]" : "lg:top-10 right-0 top-5 lg:right-3"
-      } w-40 text-lg z-40 flex flex-col bg-white text-black rounded-md border border-neutral-500`}
+      } w-40 text-lg z-40 ${editModal ? "flex" : "hidden"} flex-col bg-white text-black rounded-md border border-neutral-500`}
     >
       {worksheetPage && (
         <a

@@ -1,3 +1,5 @@
+'use client'
+
 import { Feedback } from "@prisma/client";
 import { TbStar, TbStarFilled } from "react-icons/tb";
 
