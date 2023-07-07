@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       const secret = process.env.API_SECRET
       const body = await request.json()
       const { subject, topic, title, num }: { subject: string, topic: string, title: string, num: number} = body
-      const res = await fetch(`https://worksheet-ai-api-production.up.railway.app/worksheet?secret=${secret}`,{
+      const res = await fetch(`https://worksheetai-api.onrender.com/worksheet?secret=${secret}`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
