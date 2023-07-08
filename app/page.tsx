@@ -1,13 +1,13 @@
 import Link from "next/link"
-import { TbArrowRight, TbBooks, TbRobot, TbRun, TbSchool } from "react-icons/tb"
+import { TbArrowRight, TbBooks, TbBrandOpenai, TbExternalLink, TbRobot, TbRun, TbSchool } from "react-icons/tb"
 
 export default function Home() {
   return (
-    <div>
-      <section className="mt-32 w-full flex justify-center p-6 text-center">
+    <div className="flex flex-col space-y-44 mt-32">
+      <section className="w-full flex justify-center p-6 text-center">
         <div className="w-full flex items-center flex-col space-y-6">
           <div className="text-neutral-500 border border-neutral-500 rounded-full py-2 px-4 text-xs">
-            <p>Just shipped v1.0.0</p>
+            <p>Just shipped v1.0.1</p>
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Get a worksheet. Fast.</h1>
           <p className="md:text-xl max-w-3xl text-center font-medium">Stop wasting time searching the internet for useless worksheets, use AI to create the one for you so you can focus on the actual worksheet</p>
@@ -19,13 +19,20 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="my-32 w-full flex flex-col space-y-8 justify-center items-center">
+      <section className="w-full flex flex-col space-y-5 justify-center items-center">
+        <h3 className="font-bold text-3xl md:text-4xl flex items-center">Now powered by the latest GPT4 by <TbBrandOpenai className="ml-2 mr-1"/> OpenAi</h3>
+        <a href="https://openai.com/research/gpt-4" className="font-medium flex space-x-2 items-center py-2.5 px-4 rounded-md bg-white text-black hover:bg-opacity-80 duration-300">
+          <p>Learn More</p>
+          <TbExternalLink className="text-xl"/>
+        </a>
+      </section>
+      <section className="w-full flex flex-col space-y-8 justify-center items-center">
         <h3 className="font-bold text-3xl md:text-4xl">Yep. It really is that easy.</h3>
         <div className="p-5 w-full md:w-3/5 lg:w-2/5 rounded-md bg-black border border-neutral-500">
           <video autoPlay={true} loop={true} muted={true} src="/easy.mov" className="w-full"/>
         </div>
       </section>
-      <section className="w-full flex flex-col space-y-10 items-center mt-32">
+      <section className="w-full flex flex-col space-y-10 items-center">
         <div className="flex flex-col space-y-4 text-center p-6">
           <p className="text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Natural language processing</p>
           <h3 className="font-bold text-3xl md:text-4xl">Generative AI to your advantage</h3>

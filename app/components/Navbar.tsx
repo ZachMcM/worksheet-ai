@@ -18,12 +18,12 @@ const Navbar = () => {
     <>
       <nav className="w-full flex justify-between py-5 px-6 md:p-8 md:px-10 sticky top-0 left-0 bg-black border-b border-neutral-500">
         <div className="flex space-x-5 items-center text-lg md:text-2xl">
-          <h1 className="font-bold">
+          <Link href="/" className="font-bold">
             worksheet
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
               ai
             </span>
-          </h1>
+          </Link>
           {session && session.user && session.user.image && (
             <>
               <p className="text-4xl text-neutral-500 font-thin">/</p>
