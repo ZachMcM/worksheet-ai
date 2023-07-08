@@ -20,7 +20,7 @@ export default function Home() {
         </div>
       </section>
       <section className="w-full flex flex-col space-y-5 justify-center items-center">
-        <h3 className="font-bold text-3xl md:text-4xl flex items-center">Now powered by the latest GPT4 by <TbBrandOpenai className="ml-2 mr-1"/> OpenAi</h3>
+        <h3  className=" max-w-screen-sm font-bold text-3xl md:text-4xl flex items-center">Now powered by GPT4</h3>
         <a href="https://openai.com/research/gpt-4" className="font-medium flex space-x-2 items-center py-2.5 px-4 rounded-md bg-white text-black hover:bg-opacity-80 duration-300">
           <p>Learn More</p>
           <TbExternalLink className="text-xl"/>
